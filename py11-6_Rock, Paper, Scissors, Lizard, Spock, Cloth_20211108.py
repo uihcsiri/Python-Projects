@@ -129,11 +129,10 @@ while True:
      print ("You choose \"" + weap_dict[user]+"\"")
      start_again = fight(user)
      print('[DEBUG]', start_again)
-     if start_again == False:#但他好像停不下來QQ
+     if start_again == False:
          print("I said stop")
          break
     
  except (TypeError, ValueError, KeyError):
      print("Please enter numbers between 1 and 6.") 
-     #keyerror happens when using dict==>有辦法在user input時就偵測到嗎?
 
