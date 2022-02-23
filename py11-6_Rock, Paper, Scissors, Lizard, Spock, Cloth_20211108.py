@@ -128,7 +128,6 @@ while True:
      user = int(input())
      print ("You choose \"" + weap_dict[user]+"\"")
      start_again = fight(user)
-     print('[DEBUG]', start_again)
      if start_again == False:
          print("I said stop")
          break
