@@ -4,7 +4,7 @@ def get_name():
     singer = input("Please enter the singer you would like to search:")
     singer_lower = singer.lower()
 
-    singer_list = ["ed", "sheeran", "taylor", "swift", "katy", "perry", "ariana", "grande", "chainsmoker","oasis"]
+    singer_list = ["ed", "sheeran", "taylor", "swift", "katy", "perry", "ariana", "grande", "chainsmoker", "oasis"]
     result = []
     for name in singer_list:
         if name in singer_lower:
@@ -30,52 +30,68 @@ def search_song(result):
     }
 
 
-    flag = 0
+    flag = 0 #to avoid double showing 
+    ava = []
     for word in result:
-        if (word==0 or word ==1):#ed
-            if (flag==0):
+        if (word == 0 or word == 1):#ed
+            if (flag == 0):
                 print(song_dict[1])
                 print(song_dict[2])
                 print(song_dict[3])
-                flag+=1
+                ava.append(1)
+                ava.append(2)
+                ava.append(3)
+                flag += 1
             else:
-                flag-=1
+                flag -= 1
                 continue
-        if (word==2 or word ==3):#taylor
-            if (flag==0):
+                
+        if (word == 2 or word == 3):#taylor
+            if (flag == 0):
                 print(song_dict[3])
-                flag+=1
+                flag += 1
+                ava.append(3)
             else:
-                flag-=1
-                continue            
-        if (word==4 or word ==5):#katy
-            if (flag==0):
+                flag -= 1
+                continue
+                
+        if (word == 4 or word == 5):#katy
+            if (flag == 0):
                 print(song_dict[4])
                 print(song_dict[5])
                 print(song_dict[6])
-                flag+=1
+                ava.append(4)
+                ava.append(5)
+                ava.append(6)
+                flag += 1
             else:
-                flag-=1
+                flag -= 1
                 continue                  
-        if (word==6 or word ==7):#ariana
-            if (flag==0):
+        if (word == 6 or word == 7):#ariana
+            if (flag == 0):
                 print(song_dict[7])
-                flag+=1
+                ava.append(7)
+                flag += 1
             else:
-                flag-=1
+                flag -= 1
                 continue
-        if (word==8):#chainsmoker
+        if (word == 8):#chainsmoker
             print(song_dict[8])
-        if (word==9):#oasis
+            ava.append(8)
+            
+        if (word == 9):#oasis
             print(song_dict[9])
-
-    user = input("Please enter a numer to choose the song:")
+            ava.append(9)
 
     while True:
+        user = input("Please enter a numer to choose the song:")
         try:
             user = int(user)
-            return user
-            
+            if user in ava:
+                return user
+            else:
+                print("Invalid input! Please key again.")
+                
         except(ValueError):
             print("Error! Please try again.\n")
             continue
@@ -386,25 +402,32 @@ def lyric_generator(choice):
 
     print(lyric_dict[choice])
 
+def playagain():
+    print("Press * to search again")
+    again = input()
+    if (again == "*"):
+        return 1
+    else:
+        return 0
+
 
 def main():
     while True:
         result = get_name()
         if (result == []):
-            print("Press * to search again")
-            again = input()
-            if (again == "*"):
-                continue
-            else:
+            re = playagain()
+            if re == 0:
                 break
+            else:
+                continue
+            
         else:
-            user_choice= search_song(result)
+            user_choice = search_song(result)
             lyric_generator(user_choice)
-            print("Press * to search again")
-            again = input()
-            if (again == "*"):
-                continue
-            else:
+            re = playagain()
+            if re == 0:
                 break
+            else:
+                continue
         
 main()
