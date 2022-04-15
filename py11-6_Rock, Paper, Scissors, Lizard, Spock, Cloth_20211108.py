@@ -34,6 +34,29 @@ weap_dict = {
     5: "Spock",
 }
 
+def play_again():
+    flag_again = 1
+    while flag_again > 0:
+        print("Would you like to play again?")
+        print("Please just key \"Y\" or \"N\"")
+        try: 
+            answer = input()
+            if (answer=="Y" or answer == "y"):
+                flag_again-=1
+                print("\nPlease choose your weapon!")
+                return True
+            elif (answer=="N" or answer =="n"):
+                flag_again-=1
+                print("Game over")
+                return False
+            else:
+                raise ValueError
+
+        except(TypeError, ValueError):
+            print("Only \"Y\" or \"N\" are allowed.")
+            print("Please try again.\n")
+            
+
 def fight(user): #return T/F
  import random
  competitor = random.randint(1,5)
@@ -99,37 +122,12 @@ def fight(user): #return T/F
 5 beats 3 & 1
 """
 
-
-
-def play_again():
-    flag_again = 1
-    while flag_again > 0:
-        print("Would you like to play again?")
-        print("Please just key \"Y\" or \"N\"")
-        try: 
-            answer = input()
-            if (answer=="Y" or answer == "y"):
-                flag_again-=1
-                print("\nPlease choose your weapon!")
-                return True
-            elif (answer=="N" or answer =="n"):
-                flag_again-=1
-                print("Game over")
-                return False
-            else:
-                raise ValueError
-
-        except(TypeError, ValueError):
-            print("Only \"Y\" or \"N\" are allowed.")
-            print("Please try again.\n")
-
 while True: 
  try: 
      user = int(input())
      print ("You choose \"" + weap_dict[user]+"\"")
      start_again = fight(user)
      if start_again == False:
-         print("I said stop")
          break
     
  except (TypeError, ValueError, KeyError):
